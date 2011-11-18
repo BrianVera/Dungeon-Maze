@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html>
+<head>
+	<title>Para Interfaz</title>
+		
+	<link href="interfaz_Add.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="prototype.js"></script>
+	<script type="text/javascript" src="agregarcoment.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript"></script>   
+	<script src="http://dinhquanghuy.110mb.com/jquery.cookie.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+	var popupStatus = 0;
+
+	function loadPopup(){
+    if(popupStatus==0){
+        $("#backgroundPopup").css({
+            "opacity": "0.7"
+        });
+        $("#backgroundPopup").fadeIn("slow");
+        $("#popupContact").fadeIn("slow");
+        popupStatus = 1;
+		}
+	}
+	
+	function disablePopup(){
+		if(popupStatus==1){
+        $("#backgroundPopup").fadeOut("slow");
+        $("#popupContact").fadeOut("slow");
+        popupStatus = 0;
+		}
+	}
+
+	function centerPopup(){
+		var windowWidth = document.documentElement.clientWidth;
+		var windowHeight = document.documentElement.clientHeight;
+		var popupHeight = $("#popupContact").height();
+		var popupWidth = $("#popupContact").width();
+    $("#popupContact").css({
+        "position": "absolute",
+        "top": windowHeight/2-popupHeight/2,
+        "left": windowWidth/2-popupWidth/2
+    });
+    
+	}
+
+	function openpu(){ 
+        centerPopup();
+        loadPopup();   
+    }       
+
+	$(document).ready(function(){
+	
+    $("#popupContactClose").click(function(){
+        disablePopup();
+        $.cookie("anewsletter", "1", { expires: 7 });
+    });
+    
+    
+	});	
+
+
+	</script>
+	
+	
+	
+	
+	
+	
+</head>	
+<body>
+		<div class="container">
+			
+		
+			<div class="main">	
+						
+			
+			
+			<div id="second">
+				<h1 id="identificacion">hacer click para ver el personaje</h1>
+				<div id="dejanos_comentario">
+					<p>Jugador</p>
+					<input type="text" class="nombre:" id="nombreComnt"/><br/>
+					
+				
+				</div>
+				<div id="almacen_de_comentario">
+				</div>
+			</div>
+			
+			<div id="popupContact">
+					<a id="popupContactClose">salir</a>
+					<h1>Guerrero</h1>
+					<div id="Warrior"><image id="Guerrero" src="warrior.jpg" Title="Guerrero"/></div>
+					<p>De las lejanas tierras de Hsir, desde tiempos inmemoriables los guerreros
+					han recorrido las tierras conocidas en busca de distintas cosas, desde la fama
+					hasta el simple placer de quitar la vida de sus adversarios. </p>
+					
+						<div id="pick">
+							<input class="boton"type="submit" value="Escoger">
+						</div>	
+			</div>
+			
+			<div id="backgroundPopup"></div>
+			
+			<div id="registro">
+				<h1>Ver Jugadores</h1>
+				<button class="boton" id="uneteb" onclick="openpu()">Guerrero</button>
+			
+			</div>
+			
+			
+			</div>
+			
+			
+			
+			
+			
+		</div>
+	
+</body>
+</html>
