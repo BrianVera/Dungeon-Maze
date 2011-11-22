@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>	
+		<title>juego</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript"></script>   
+		<script src="http://dinhquanghuy.110mb.com/jquery.cookie.js" type="text/javascript"></script>
+		<link href="estilomove.css" rel="stylesheet" type="text/css"/>
+		
+	</head>
+	
+	<body onLoad="img_canvas()">
+		
+		<h2 id="status2">0, 0</h2>
+		</br>
+		<h2 id ="status">0, 0</h2>
+		</br> 
+		<div id="bla">
+			<p>MOVER</p>
+		</div>
+		<canvas style="width: 500px; height: 500px; border: 2px solid black;" id="special">
+			Click me anywhere!
+			Your browser doesn´t support the html5 element canvas.
+		</canvas>
+		
+		<script type="text/javascript">
+			var x = 0;
+			var y = 0;
+			var x1 = 0;
+			var y2 = 0;
+			var t1 = 0;
+			var t2 = 0;
+			
+			$("#special").click(function(e){
+					var $this = $(this);
+					x = e.pageX - $this.offset().left;
+					y = e.pageY - $this.offset().top;					
+					$('#status2').html(x +', '+ y);
+					
+					
+			}); 
+		
+			$("#special").mousemove(function(e){
+				var $this = $(this);
+				x1 = e.pageX - $this.offset().left;
+				y1 = e.pageY - $this.offset().top;
+				$('#status').html(x1 +', '+ y1);
+			});
+			
+			var figura= new Image();
+			figura.src="Cleric.jpg"; 
+				var canvas = document.getElementById("special");
+				var context = canvas.getContext("2d");
+			
+			function getX(){
+				return x;
+			};
+			function getY(){
+				return y;
+			};
+			function getFigura(){
+				return figura;
+			};
+			function limpiar(){
+				canvas.width = canvas.width;
+			} 
+			function img_canvas(){
+			
+				var figura = this.getFigura();
+				var x = getX();
+				var y = getY();
+				context.drawImage(figura,0,0,20,20);					
+			};	
+			
+			$('#bla').hover(
+				function(){ $(this).addClass('hover')},
+				function(){ $(this).removeClass('hover');}
+			);	
+			
+			$('#bla').click(function(){	
+				limpiar();	
+				//|| x-t1 > -100, || y-t2 > -100
+				var x = getX();
+				var y = getY();				
+				console.log(x-t1);
+				console.log(y-t2);				
+				if( x-t1 < 100 && x-t1 >-100 && y-t2 < 150 && y-t2 > -150 ){
+				context.drawImage(figura,x/1.78,y/3.846,20,20);	
+				t1=x;
+				t2=y;
+				}	
+				else{
+				context.drawImage(figura,t1/1.78,t2/3.846,20,20);
+				alert('Fuera de rango')
+				}
+				
+			});
+			
+		</script>		
+	</body>
+</html>
